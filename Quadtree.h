@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <math.h> 
+#include <thread>  
 using namespace std;
 
 class QuadTree {
@@ -23,7 +24,6 @@ class QuadTree {
 		void AddCrimeToSegment(Crime);
 		float DistancePoint(Node*, Point);
 		Edge KNN(Point, int);
-
 		Quad* root;
 
 		struct CompareRect {
@@ -145,7 +145,7 @@ Edge QuadTree::KNN(Point a, int k) {
 		Quad* e = RectsByPriority.top();
 
 
-		if (PointsByPriority.size() >= k && (RectsByPriority.top()->point_distance > PointsByPriority[k].minDistance)) {
+		if (PointsByPriority.size() >= k && (RectsByPriority.top()->point_distance > PointsByPriority[k-1].minDistance)) {
 			break;
 		}
 
@@ -182,6 +182,7 @@ float QuadTree::DistancePoint(Node *A, Point B) {
 void QuadTree::AddCrimeToSegment(Crime C) {
 
 	Point CrimeLatLong(stod(C.getLat()), stod(C.getLong()));
+
 	Edge NeartsEdge= KNN(CrimeLatLong,1);
 
 	float distA=DistancePoint(NeartsEdge.A, CrimeLatLong);

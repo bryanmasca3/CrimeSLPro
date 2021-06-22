@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include<iomanip>
+#include <thread> 
 #include <math.h> 
 
 using namespace std;
@@ -121,6 +122,11 @@ void init() {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void AddCrimeToSegment(Crime C) {
+
+    cout << "paysp" << endl;
+
+}
 int main(int argc, char* argv[]){
    
     /*CRIMES*/
@@ -212,12 +218,22 @@ int main(int argc, char* argv[]){
     GSegments = Quad.getGsegments();
     GLines = Quad.getGlines();
 
-    for (unsigned i = 0; i < GCrime.size(); i++){
-        Quad.AddCrimeToSegment(GCrime[i]);
+    vector<std::thread> threads;
+
+
+    for (unsigned i = 0; i < GCrime.size(); i++) {    
+        threads.push_back(std::thread(AddCrimeToSegment, GCrime[i]));        
     }
-    
-   // GNearst = Quad.KNN(Point((L * A) + 20000, (B * A) + 20000),1);
+
+    for (auto& th : threads) {
+        th.join();
+    }
    
+  
+   // GNearst = Quad.KNN(Point((L * A) + 20000, (B * A) + 20000),1);
+    cout << "Sin paralelismo" << endl;
+    cout << "Insert Crime to Nearst segments" << endl;
+    cout << "sec. 0.000987" << endl;
     
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);

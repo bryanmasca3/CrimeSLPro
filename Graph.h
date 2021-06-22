@@ -10,6 +10,7 @@
 #include <queue> 
 #include <math.h> 
 #include "Node.h"
+
 #include "Edge.h"
 using namespace std;
 
@@ -26,7 +27,10 @@ class Graph{
 		map<string, Node> HashNodes;
 		vector<Edge> E;
 };
+
+/**/
 Graph::Graph(vector<Node> V, vector<Edge> E){
+
 
 
 	for (unsigned i = 0; i < V.size(); i++) {
