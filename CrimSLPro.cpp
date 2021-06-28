@@ -230,11 +230,6 @@ int main(int argc, char* argv[]){
     }
    
   
-   // GNearst = Quad.KNN(Point((L * A) + 20000, (B * A) + 20000),1);
-    cout << "Sin paralelismo" << endl;
-    cout << "Insert Crime to Nearst segments" << endl;
-    cout << "sec. 0.000987" << endl;
-    
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(500, 500);
